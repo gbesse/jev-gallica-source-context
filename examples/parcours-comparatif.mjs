@@ -1,4 +1,5 @@
 // Objectif : produire un rapport hors ligne comparant les trois chemins de décision.
+import assert from "node:assert/strict";
 import { assessArchiveExtract } from "../src/index.mjs";
 import { createFakeProvider } from "../src/jev.mjs";
 const principal = {
@@ -79,4 +80,10 @@ for (const [scénario, dossier] of [["principal", principal], ["limite détermin
   const résultat = await assessArchiveExtract(dossier, provider);
   résultats.push({ scénario, décision: résultat.label, revueHumaine: résultat.review, déterministe: résultat.deterministic });
 }
+assert.deepEqual(résultats.map((r) => [r.décision, r.revueHumaine, r.déterministe]), [
+  ["contexte_etaye", false, false],
+  ["aucun_extrait_fourni", false, true],
+  ["revue_requise", true, false],
+]);
+assert.equal(provider.calls, 2);
 console.log(JSON.stringify({ dépôt: "jev-gallica-source-context", résultats }, null, 2));

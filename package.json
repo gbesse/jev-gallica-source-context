@@ -1,6 +1,6 @@
 {
   "name": "@gbesse/jev-gallica-source-context",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Replace un extrait OCR de Gallica dans son contexte éditorial et distingue information, opinion et publicité.",
   "type": "module",
   "license": "MIT",
